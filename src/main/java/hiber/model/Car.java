@@ -33,6 +33,7 @@ public class Car {
 
     public int getSeries() { return series; }
 
+
     @Override
     public String toString() {
         return "Car{" +
