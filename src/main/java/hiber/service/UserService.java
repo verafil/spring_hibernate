@@ -7,5 +7,6 @@ import java.util.List;
 public interface UserService {
     void add(User user);
     List<User> listUsers();
-    User getUserBySeries(int series);
+    List<User> getUserBySeries(int series);
+    void update(User user);
 }

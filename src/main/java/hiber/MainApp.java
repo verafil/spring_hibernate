@@ -16,15 +16,27 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      Car car1 = new Car("zapor", 12345);
-      Car car2 = new Car("mers", 54321);
-      Car car3 = new Car("bmw", 78945);
-      Car car4 = new Car("alfa", 45612);
+     // Car car1 = new Car("zapor", 12345);
+//      Car car2 = new Car("mers", 54321);
+//      Car car3 = new Car("bmw", 78945);
+//      Car car4 = new Car("alfa", 45612);
 
-      userService.add(new User("User1", "Lastname1", "user1@mail.ru", car1));
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru", car2));
-      userService.add(new User("User3", "Lastname3", "user3@mail.ru", car3));
-      userService.add(new User("User4", "Lastname4", "user4@mail.ru", car4));
+//      userService.add(new User("User1", "Lastname1", "user1@mail.ru", car1));
+//      userService.add(new User("User2", "Lastname2", "user2@mail.ru", car2));
+//      userService.add(new User("User3", "Lastname3", "user3@mail.ru", car3));
+//      userService.add(new User("User4", "Lastname4", "user4@mail.ru", car4));
+
+      User user1 = new User("User1", "Lastname1", "user1@mail.ru");
+      userService.add(user1);
+      Car car1 = new Car("zapor", 12345);
+      car1.setUser(user1);
+      user1.setCar(car1);
+      userService.update(user1);
+
+
+//      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
+//      userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
+//      userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
 
       List<User> users = userService.listUsers();
       for (User user : users) {
@@ -36,7 +48,7 @@ public class MainApp {
          System.out.println();
       }
 
-      System.out.println("Найден юзер по серийному номеру авто: " + userService.getUserBySeries(12345));
+     System.out.println("Найден юзер по серийному номеру авто: " + userService.getUserBySeries(12345));
       context.close();
    }
 }

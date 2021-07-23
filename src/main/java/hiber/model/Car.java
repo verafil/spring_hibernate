@@ -16,6 +16,9 @@ public class Car {
     @Column(name = "series")
     private int series;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private User user;
+
     public Car() { }
 
     public Car(String model, int series) {
@@ -33,6 +36,7 @@ public class Car {
 
     public int getSeries() { return series; }
 
+    public void setUser(User user) { this.user = user; }
 
     @Override
     public String toString() {

@@ -1,6 +1,5 @@
 package hiber.dao;
 
-import hiber.model.Car;
 import hiber.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -19,7 +18,6 @@ public class UserDaoImp implements UserDao {
    @Override
    public void add(User user) {
       sessionFactory.getCurrentSession().save(user);
-      sessionFactory.getCurrentSession().save(user.getCar());
    }
 
    @Override
@@ -30,11 +28,12 @@ public class UserDaoImp implements UserDao {
    }
 
    @Override
-   public User getUserBySeries(int series) {
-      Query query1=sessionFactory.getCurrentSession().createQuery("from Car a where a.series = :series");
-      Car car = (Car) query1.setParameter("series", series).uniqueResult();
-      Query query2=sessionFactory.getCurrentSession().createQuery("from User a where a.car = :idCar");
-      return (User) query2.setParameter("idCar", car).uniqueResult();
+   public List getUserBySeries(int series) {
+      Query query=sessionFactory.getCurrentSession().createQuery("from User a left join fetch a.car where a.car.series = :series");
+      return query.setParameter("series", series).getResultList();
    }
-
+   @Override
+   public void update(User user) {
+      sessionFactory.getCurrentSession().update(user);
+   }
 }
